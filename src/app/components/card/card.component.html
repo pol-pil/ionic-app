@@ -1,0 +1,124 @@
+@for (song of songs(); track $index) {
+<ion-card >
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <img [src]="song.image" />
+      </ion-col>
+      <ion-col class="details-container" size="7">
+        <ion-card-header>
+          <ion-card-title
+            ><b>{{ song.title }}</b></ion-card-title
+          >
+          <ion-card-subtitle>{{ song.artist }}</ion-card-subtitle>
+        </ion-card-header>
+        <div class="button-container">
+          <ion-card-content>
+            @if (song.addedby === "Domenic") {
+            <ion-chip color="danger">Added By: {{ song.addedby }}</ion-chip>
+            } @else {
+            <ion-chip color="success">Added By: {{ song.addedby }}</ion-chip>
+            }
+          </ion-card-content>
+          <div>
+            <ion-button shape="round" color="success" (click)="play(song)">
+              <ion-icon slot="icon-only" name="play"></ion-icon>
+            </ion-button>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-card>
+}
+
+<ion-modal
+  [isOpen]="isModalOpen"
+  [initialBreakpoint]="0.9"
+  (willDismiss)="isModalOpen = false"
+  [breakpoints]="[0, 0.9]"
+  (ionBreakpointDidChange)="onBreakpointChange($event)"
+>
+  <ng-template>
+    <ion-header [translucent]="true">
+      <ion-toolbar color="translucent">
+        <ion-buttons slot="start">
+          <ion-button (click)="closeModal()">
+            <ion-icon size="large" name="chevron-down"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+        <ion-buttons slot="end">
+          <ion-button (click)="openTimerModal()">
+            <ion-icon size="large" name="timer-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content class="ion-padding">
+      <div class="song-content">
+        <div>
+          <img class="thumbnail" [src]="selectedSong?.image" alt="Song cover" />
+        </div>
+        <div class="ion-padding">
+          <h3>
+            <strong>{{ selectedSong?.title }}</strong>
+          </h3>
+          <p>{{ selectedSong?.artist }}</p>
+          <ion-range color="dark" />
+          <div class="music-controls">
+            <ion-button fill="clear" color="dark">
+              <ion-icon name="play-skip-back" size="large"></ion-icon>
+            </ion-button>
+
+            <ion-button
+              fill="solid"
+              color="success"
+              shape="round"
+              (click)="togglePlay()"
+            >
+              <ion-icon
+                [name]="isPlaying ? 'pause' : 'play'"
+                size="large"
+              ></ion-icon>
+            </ion-button>
+
+            <ion-button fill="clear" color="dark">
+              <ion-icon name="play-skip-forward" size="large"></ion-icon>
+            </ion-button>
+          </div>
+        </div>
+      </div>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
+<ion-modal
+  [isOpen]="isTimerModalOpen"
+  [backdropDismiss]="true"
+  (willDismiss)="isTimerModalOpen = false"
+  [initialBreakpoint]="0.25"
+  [breakpoints]="[0, 0.25]"
+>
+  <ng-template>
+    <ion-header [translucent]="true"  class="ion-padding">
+      <ion-toolbar color="translucent">
+        <h3>Sleep Timer</h3>
+        <ion-buttons slot="end">
+          <ion-button (click)="closeTimerModal()">
+            <ion-icon size="large" name="checkmark"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <ion-input
+        label="Minutes"
+        type="number"
+        fill="outline"
+        [(ngModel)]="myDuration"
+        (ionInput)="time(myDuration)"
+      ></ion-input>
+    </ion-content>
+  </ng-template>
+</ion-modal>

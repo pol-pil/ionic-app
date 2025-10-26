@@ -1,0 +1,7 @@
+{
+  "name": "Topic3-Services",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}

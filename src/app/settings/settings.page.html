@@ -1,0 +1,18 @@
+<app-header [headerTitle]="'Settings'"></app-header>
+
+<ion-content [fullscreen]="true">
+  <div class="container">
+    <ion-label>Couldn't find settings</ion-label>
+    <div>
+      <ion-button shape="circle" routerLink="/" fill="clear">
+        <ion-icon
+          color="success"
+          slot="icon-only"
+          name="home-outline"
+        ></ion-icon>
+      </ion-button>
+    </div>
+  </div>
+  <div class="latlng"><code>Latitude: {{mapService.lat}} | Longitude: {{mapService.lng}}</code></div>
+</ion-content>
+

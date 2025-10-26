@@ -1,0 +1,46 @@
+img {
+  height: 100%;
+  width: 120%;
+  object-fit: cover;
+}
+
+.details-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.song-content {
+  display: flex;
+  flex-direction: column;
+
+  img {
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    margin-block: 50px;
+  }
+
+  p {
+    margin-top: -6px;
+    color: gray;
+  }
+
+  ion-range {
+    --bar-height: 4px;
+    --bar-border-radius: 8px;
+    --knob-size: 20px;
+  }
+
+  .music-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+  }
+}
